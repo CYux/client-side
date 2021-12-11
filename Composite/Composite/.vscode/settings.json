@@ -1,0 +1,4 @@
+{
+    "java.project.sourcePaths": ["ui"],
+    "java.project.outputPath": "bin"
+}

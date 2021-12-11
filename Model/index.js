@@ -1,5 +1,5 @@
 var msg = '注册成功'
-console.log();
+console.log(msg);
 
 
     //Shift + alt + F
