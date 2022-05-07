@@ -1,0 +1,4 @@
+<Form [formGroup]="searchForm" (ngSubmit)="onSubmit()" style="margin-top: 1em;">
+  <input id="Search" formControlName="Search" type="text" placeholder="Search" />
+  <input id="page" type ="hidden" formControlName="page" value="1" />
+</Form>

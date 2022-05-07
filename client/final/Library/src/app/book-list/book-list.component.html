@@ -1,0 +1,16 @@
+<a (click)="searchBooks()">
+  <h3>books</h3>
+</a>
+
+<a (click)="onclick()">
+  <h3>click</h3>
+</a>
+
+<div *ngFor="let book of docs">
+  <a [title]="book.title+ ' details'"
+  [routerLink]="['/book', book.key]">
+    <h3>{{book.title}}</h3>
+  </a>
+  <p>Author {{book.author_name}}</p>
+  <p>{{book.publisher}}</p>
+</div>
