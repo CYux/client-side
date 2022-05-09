@@ -7,22 +7,28 @@ import { books} from '../models/book';
   templateUrl: './book-list.component.html',
   styleUrls: ['./book-list.component.css']
 })
+
+
 export class BookListComponent implements OnInit {
   displayedColumns: string[] = ['title', 'author', 'publication', 'details'];
+
   docs:any[] =[];
   constructor(private openLibraryApiService: OpenLibraryApiService) { }
 
   ngOnInit(): void {
   }
   book : Book | undefined;
+
   async searchBooks() {
     const res =
       await this.openLibraryApiService.searchBooks('harry potter');
+
     this.docs = res.docs;
     this.docs.forEach(ele => {
       books.push(ele);
     });
     console.log(this.docs);
+
   }
 
 
