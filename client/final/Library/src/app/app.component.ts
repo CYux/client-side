@@ -12,6 +12,7 @@ export class AppComponent {
   //@ts-ignore
   searchForm: FormGroup;
 
+  selected='title';
 
   constructor(private formBuilder: FormBuilder,private router: Router
     ) {

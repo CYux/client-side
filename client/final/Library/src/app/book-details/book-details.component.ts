@@ -3,6 +3,7 @@ import { Book,books } from './../models/book';
 import { Component, OnInit } from '@angular/core';
 import { FavoriteService } from './../service/favorite.service';
 import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-book-details',
   templateUrl: './book-details.component.html',
@@ -12,6 +13,7 @@ export class BookDetailsComponent implements OnInit {
 
   book: Book | undefined;
   bookKeyFromRoute: String | undefined;
+  collapsed: boolean = false;
   cover_url = 'https://covers.openlibrary.org/b/id/';
   constructor(private route: ActivatedRoute
     , private favoriteService: FavoriteService,

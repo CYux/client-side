@@ -29,11 +29,15 @@ export class OpenLibraryApiService {
   }
 
   searchBooks(query: string) {
-    console.log('/search.json', { q: query + "&page=2" });
-    return this.get('/search.json', { q: query, page: 2 });
+    console.log('/search.json', { q: query });
+    return this.get('/search.json', { q: query });
   }
 
   getBook(key: string) {
     return this.get(`/books/${key}.json`);
+  }
+
+  getAuthor(author_key:string){
+    return this.get(`/authors/${author_key}.json`);
   }
 }

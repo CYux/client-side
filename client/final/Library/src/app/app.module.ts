@@ -10,6 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { BookSearchComponent } from './book-search/book-search.component';
 import { AuthorHomeComponent } from './author-home/author-home.component';
+import { MatSelectModule } from '@angular/material/select'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,11 +29,14 @@ import { AuthorHomeComponent } from './author-home/author-home.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatSelectModule,
     RouterModule.forRoot([
       { path: '', component: BookListComponent },
       { path: 'book/:bookKey', component: BookDetailsComponent },
       { path: 'favorite', component: FavoriteComponent },
       {path: 'search',component:BookSearchComponent},
+      {path: 'author/:authorKey',component:AuthorHomeComponent}
 
     ]),
   ],

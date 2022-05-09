@@ -1,4 +1,7 @@
+import { ActivatedRoute } from '@angular/router';
+import { Author, authors } from './../models/author';
 import { Component, OnInit } from '@angular/core';
+import { OpenLibraryApiService } from './../service/open-library-api.service';
 
 @Component({
   selector: 'app-author-home',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthorHomeComponent implements OnInit {
 
-  constructor() { }
+  author: Author|undefined;
+  authorFromRoute: String |undefined;
+  cover_url="https://covers.openlibrary.org/a/olid/";
+  constructor(private route:ActivatedRoute,
+    private openLibraryApiService: OpenLibraryApiService
+    ) { }
 
   ngOnInit(): void {
+    //first get the author key from the current route
+    const routeRarams=this.route.snapshot.paramMap;
+    this.authorFromRoute=String(routeRarams.get('authorKey'));
+
+    //find the author that correspond with the id provide in route
+    this.author=authors.find(
+      (author)=>author.key===this.authorFromRoute
+    );
   }
 
 }
