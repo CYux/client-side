@@ -13,7 +13,6 @@ export class BookListComponent implements OnInit {
 
   @Input() docs!:any[];
 
-  displayedColumns: string[] = ['title', 'author', 'publication', 'details'];
   ngOnInit(): void {
   }
 }

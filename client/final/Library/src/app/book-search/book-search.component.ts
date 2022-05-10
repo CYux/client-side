@@ -1,7 +1,6 @@
 import { Component, OnInit,Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { OpenLibraryApiService } from './../service/open-library-api.service';
-import { Book,books } from './../models/book';
 
 @Component({
   selector: 'app-book-search',
@@ -17,8 +16,6 @@ export class BookSearchComponent implements OnInit {
     page: '',
     selected: '',
   });
-
-  displayedColumns: string[] = ['title', 'author', 'publication', 'details'];
 
   ngOnInit() { }
 
@@ -56,16 +53,6 @@ export class BookSearchComponent implements OnInit {
 
     console.log(this.docs);
   }
-
-  async searchSubject() {
-    const res =
-      await this.openLibraryApiService.getSubjest(this.searchForm.value.search);
-
-
-    this.docs = res.docs;
-    console.log(this.docs);
-
- }
 
 }
 

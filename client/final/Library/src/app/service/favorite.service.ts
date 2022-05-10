@@ -1,20 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Book } from '../models/book';
 @Injectable({
   providedIn: 'root'
 })
 //service for the favorite book cart
 export class FavoriteService {
 
-  items: Book[] = [];
+  items: any[] = [];
   constructor() { }
 
   //add book into the cart
-  addToFavorite(book: Book) {
+  addToFavorite(book:any) {
     this.items.push(book);
   }
 
-  //get
+  //get book
   getItems() {
     return this.items;
   }

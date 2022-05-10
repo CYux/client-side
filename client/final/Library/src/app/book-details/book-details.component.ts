@@ -1,6 +1,4 @@
-import { authors } from './../models/author';
 import { OpenLibraryApiService } from './../service/open-library-api.service';
-import { Book } from './../models/book';
 import { Component, OnInit } from '@angular/core';
 import { FavoriteService } from './../service/favorite.service';
 import { ActivatedRoute } from '@angular/router';
@@ -32,6 +30,7 @@ export class BookDetailsComponent implements OnInit {
 
   }
 
+  //add the book item into the cart
   addToFavorite(book: any) {
     this.favoriteService.addToFavorite(book);
     window.alert('Your book has been added to the Favorite!');
