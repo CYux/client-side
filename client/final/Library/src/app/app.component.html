@@ -1,28 +1,3 @@
 <app-top-bar></app-top-bar>
 
-
-<div class="container text-right">
-  <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
-    <div class="input-group">
-      <input class="input-group-field" type="search" value="" placeholder="Search" formControlName="search">
-      <div class="input-group-button"><button mat-flat-button color="accent">
-        <span class="material-icons">
-          search
-          </span>
-        </button></div>
-    </div>
-    <div>
-      <mat-form-field appearance="fill" style="background-color: rgb(91, 165, 250);">
-        <mat-select [(value)]="selected" >
-          <mat-option style="background-color: rgb(104, 247, 104);">Select an option</mat-option>
-          <mat-option value="title" style="background-color: rgb(104, 247, 104);">title</mat-option>
-          <mat-option value="author" style="background-color: rgb(104, 247, 104);">author</mat-option>
-          <mat-option value="subject" style="background-color: rgb(104, 247, 104);">subject</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <p>You selected: {{selected}}</p>
-    </div>
-  </form>
-  <router-outlet></router-outlet>
-</div>
+<router-outlet></router-outlet>

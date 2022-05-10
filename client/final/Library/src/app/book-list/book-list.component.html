@@ -1,18 +1,21 @@
-<a (click)="searchBooks()">
-  <h3>books</h3>
-</a>
+<div *ngIf="docs">
+  <div *ngFor="let book of docs">
+    <a [title]="book.title+ ' details'" [routerLink]="['/book', book.key]">
+      <h3>{{book.title}}</h3>
+    </a>
+    <img *ngIf="book.cover_i; else temp" [src]="'https://covers.openlibrary.org/b/id/'+book.cover_i+'-M.jpg'"
+      [alt]="book.cover_i" width="100 px" height="120 px">
+    <a [title]="book.author_name+ ' details'" [routerLink]="['/authors/'+book.author_key]">
+      <h4>Author {{book.author_name}}</h4>
+    </a>
+    <p>{{book.publisher}}</p>
 
-<div *ngFor="let book of docs">
-  <a [title]="book.title+ ' details'"
-  [routerLink]="['/book', book.key]">
-    <h3>{{book.title}}</h3>
-  </a>
-  <img [src]="'https://covers.openlibrary.org/b/id/'+book.cover_i+'-M.jpg'" [alt]="book.cover_i" width="100 px" height="120 px"  >
-  <a [title]="book.author_name+ ' details'"
-  [routerLink]="['/author/'+book.author_key]">
-  <h4>Author {{book.author_name}}</h4>
-</a>
-  <p>{{book.publisher}}</p>
+    <div class="login-or">
+      <hr class="hr-or">
+      <span class="span-or"></span>
+    </div>
+  </div>
 </div>
-
-
+<ng-template #temp>
+  <img color="#859F94" style="background-color:#859F94" width="100 px" height="120 px">
+</ng-template>

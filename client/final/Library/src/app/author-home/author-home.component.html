@@ -1,9 +1,16 @@
-<h2>Author HomePage</h2>
+<h2>Author Home Page</h2>
 
 <div *ngIf="author">
-<h3>{{author.name}}</h3>
-<p>{{author.bio}}</p>
-<a [href]="cover_url+author.photos+'-L.jpg'">
-  <img [src]="cover_url+author.photos+'-M.jpg'" [alt]="author.photos">
-  </a>
+  <div class="AuthorPhoto" *ngIf="author.photos">
+    <a [href]="cover_url+author.photos[0]+'-L.jpg'">
+      <img [src]="cover_url+author.photos[0]+'-M.jpg'" [alt]="author.photos">
+    </a>
+  </div>
+  <h4>{{author.name}}</h4>
+  <h4>Bio:</h4>
+  <article *ngIf="author.bio">{{author.bio}}</article>
+  <h4>Birth Date</h4>
+
+  <article>{{author.birth_date}}</article>
+
 </div>

@@ -10,9 +10,9 @@ import { OpenLibraryApiService } from './../service/open-library-api.service';
 })
 export class AuthorHomeComponent implements OnInit {
 
-  author: Author|undefined;
+  author!:any;
   authorFromRoute: String |undefined;
-  cover_url="https://covers.openlibrary.org/a/olid/";
+  cover_url = "https://covers.openlibrary.org/a/id/";
   constructor(private route:ActivatedRoute,
     private openLibraryApiService: OpenLibraryApiService
     ) { }
@@ -20,12 +20,20 @@ export class AuthorHomeComponent implements OnInit {
   ngOnInit(): void {
     //first get the author key from the current route
     const routeRarams=this.route.snapshot.paramMap;
-    this.authorFromRoute=String(routeRarams.get('authorKey'));
+    const authorkey = "/authors/" + String(routeRarams.get('authorKey'));
 
     //find the author that correspond with the id provide in route
-    this.author=authors.find(
-      (author)=>author.key===this.authorFromRoute
-    );
+    this.getAuthor(authorkey);
+  }
+
+
+  async getAuthor(key: string) {
+    const author =
+      await this.openLibraryApiService.getAuthor(key);
+
+    console.log(author);
+
+    this.author = author;
   }
 
 }

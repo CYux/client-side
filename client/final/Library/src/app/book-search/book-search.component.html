@@ -1,13 +1,26 @@
-<div *ngFor="let book of docs">
-  <a [title]="book.title+ ' details'"
-  [routerLink]="['/book', book.key]">
-    <h3>{{book.title}}</h3>
-  </a>
-  <img [src]="'https://covers.openlibrary.org/b/id/'+book.cover_i+'-M.jpg'" [alt]="book.cover_i" width="100 px" height="120 px"  >
 
-  <a [title]="book.author_name+ ' details'"
-  [routerLink]="['/author/'+book.author_key]">
-  <h4>Author {{book.author_name}}</h4>
-</a>
+<div class="container text-right">
+  <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+    <div class="input-group">
+      <input class="input-group-field" type="search" value="" placeholder="Search" formControlName="search">
+      <div class="input-group-button"><button mat-flat-button color="accent">
+          <span class="material-icons">
+            search
+          </span>
+        </button></div>
+    </div>
+    <div>
+      <mat-form-field appearance="fill" color="#859F94">
+        <mat-label color="#859F94">Option</mat-label>
+        <mat-select  id="selected" formControlName="selected" [(value)]="searchForm.value.selected">
+          <mat-option value="title">title</mat-option>
+          <mat-option value="author">author</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <p>You selected: {{searchForm.value.selected}}</p>
+    </div>
+  </form>
+  <app-book-list [docs]="docs"> </app-book-list>
+
 </div>
-

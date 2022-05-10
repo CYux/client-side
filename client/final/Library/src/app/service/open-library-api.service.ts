@@ -1,3 +1,4 @@
+import { authors } from './../models/author';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 const baseURL = 'http://openlibrary.org';
@@ -33,11 +34,24 @@ export class OpenLibraryApiService {
     return this.get('/search.json', { q: query });
   }
 
-  getBook(key: string) {
-    return this.get(`/books/${key}.json`);
+  //search books by author
+  searchAuthor(query: string) {
+    console.log('/search.json', { author: query });
+    return this.get('/search.json', { author: query });
   }
 
-  getAuthor(author_key:string){
-    return this.get(`/authors/${author_key}.json`);
+
+  //works/OL45883W.json
+  getWork(key: string) {
+    return this.get(`${key}.json`);
+  }
+
+  getSubjest(key: string) {
+    return this.get(`/subjects/${key}.json`);
+  }
+  getAuthor(key: string) {
+    console.log(`${key}.json`);
+
+    return this.get(`${key}.json`);
   }
 }

@@ -1,9 +1,7 @@
+import { Component, OnInit,Output } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { OpenLibraryApiService } from './../service/open-library-api.service';
-import { Component, OnInit } from '@angular/core';
-import { books} from '../models/book';
-import { Subscription } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
-
+import { Book,books } from './../models/book';
 
 @Component({
   selector: 'app-book-search',
@@ -13,39 +11,61 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 export class BookSearchComponent implements OnInit {
 
-  // @ts-ignore
-  private subscription: Subscription;
+  //@Output()
+  searchForm = this.formBuilder.group({
+    search: '',
+    page: '',
+    selected: '',
+  });
+
   displayedColumns: string[] = ['title', 'author', 'publication', 'details'];
 
-  docs:any[] =[];
+  ngOnInit() { }
 
-  constructor(
-    private openLibraryApiService: OpenLibraryApiService,
-    private router: Router,
-    private route: ActivatedRoute,
-) { }
+  docs: any[] = [];
+  constructor(private openLibraryApiService: OpenLibraryApiService,
+    private formBuilder: FormBuilder,
 
-  ngOnInit() {
-    this.subscription = this.route.queryParams.subscribe(params => {
-      this.searchBooks(params['query']);
-    });
+  ) { }
+
+
+  //defult search by title book names.
+  async onSearch() {
+
+    if (this.searchForm.value.selected === 'author') {
+      this.searchAuthor();
+    }
+    else { //defult title
+      this.searchTitle();
+    }
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+  async searchTitle() {
+      const res =
+        await this.openLibraryApiService.searchBooks(this.searchForm.value.search);
+
+      this.docs = res.docs;
+      console.log(this.docs);
   }
 
-  async searchBooks(query: string) {
+  async searchAuthor() {
     const res =
-      await this.openLibraryApiService.searchBooks(query);
+      await this.openLibraryApiService.searchAuthor(this.searchForm.value.search);
 
     this.docs = res.docs;
-    this.docs.forEach(ele => {
-      books.push(ele);
-    });
+
     console.log(this.docs);
   }
 
+  async searchSubject() {
+    const res =
+      await this.openLibraryApiService.getSubjest(this.searchForm.value.search);
+
+
+    this.docs = res.docs;
+    console.log(this.docs);
+
+ }
 
 }
 

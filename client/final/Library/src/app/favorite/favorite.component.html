@@ -1,17 +1,8 @@
-<p>favorite!</p>
 <div class="cart-item" *ngFor="let item of items">
   <span>{{ item.title }}</span>
-  <span>{{ item.author_name}}</span>
 </div>
 
 <form [formGroup]="checkBook" (ngSubmit)="onSubmit()">
-
-  <div>
-    <label for="name">
-      Name
-    </label>
-    <input id="name" type="text" formControlName="name">
-  </div>
   <button class="button" type="submit">Clear</button>
 
   </form>
