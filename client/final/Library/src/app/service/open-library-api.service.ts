@@ -9,6 +9,7 @@ const baseURL = 'http://openlibrary.org';
 export class OpenLibraryApiService {
   constructor(private http: HttpClient) { }
 
+  //configuration of http api
   async get(route: string, data?: any) {
     const url = baseURL + route;
     let params = new HttpParams();
@@ -29,29 +30,26 @@ export class OpenLibraryApiService {
     });
   }
 
+  //search book
   searchBooks(query: string) {
-    console.log('/search.json', { q: query });
+
     return this.get('/search.json', { q: query });
   }
 
   //search books by author
   searchAuthor(query: string) {
-    console.log('/search.json', { author: query });
+
     return this.get('/search.json', { author: query });
   }
 
 
-  //works/OL45883W.json
+  //get the book from the api
   getWork(key: string) {
     return this.get(`${key}.json`);
   }
 
-  getSubjest(key: string) {
-    return this.get(`/subjects/${key}.json`);
-  }
+  //get the single author from the api
   getAuthor(key: string) {
-    console.log(`${key}.json`);
-
     return this.get(`${key}.json`);
   }
 }
