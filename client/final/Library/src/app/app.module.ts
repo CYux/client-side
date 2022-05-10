@@ -10,7 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { BookSearchComponent } from './book-search/book-search.component';
 import { AuthorHomeComponent } from './author-home/author-home.component';
-import { MatSelectModule } from '@angular/material/select'
+import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -32,11 +32,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     MatSelectModule,
     RouterModule.forRoot([
-      { path: '', component: BookListComponent },
+      { path: '', component: BookSearchComponent },
       { path: 'book/:bookKey', component: BookDetailsComponent },
       { path: 'favorite', component: FavoriteComponent },
-      {path: 'search',component:BookSearchComponent},
-      {path: 'author/:authorKey',component:AuthorHomeComponent}
+      {path: 'authors/:authorKey',component:AuthorHomeComponent}
 
     ]),
   ],

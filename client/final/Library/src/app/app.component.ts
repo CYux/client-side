@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -9,23 +7,9 @@ import { Router } from "@angular/router";
 })
 export class AppComponent {
   title = 'Library';
-  //@ts-ignore
-  searchForm: FormGroup;
 
-  selected='title';
-
-  constructor(private formBuilder: FormBuilder,private router: Router
+  constructor(
     ) {
   }
 
-  ngOnInit() {
-    this.searchForm = this.formBuilder.group({
-      search: ['', Validators.required],
-    });
-  }
-
-  onSearch() {
-    if (!this.searchForm.valid) return;
-    this.router.navigate(['search'], { queryParams: { query: this.searchForm.get('search')!.value } });
-  }
 }

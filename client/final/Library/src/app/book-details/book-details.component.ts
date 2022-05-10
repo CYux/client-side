@@ -1,5 +1,6 @@
+import { authors } from './../models/author';
 import { OpenLibraryApiService } from './../service/open-library-api.service';
-import { Book,books } from './../models/book';
+import { Book } from './../models/book';
 import { Component, OnInit } from '@angular/core';
 import { FavoriteService } from './../service/favorite.service';
 import { ActivatedRoute } from '@angular/router';
@@ -11,12 +12,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class BookDetailsComponent implements OnInit {
 
-  book: Book | undefined;
+  book!: any;
+  author!: any;
   bookKeyFromRoute: String | undefined;
   collapsed: boolean = false;
   cover_url = 'https://covers.openlibrary.org/b/id/';
   constructor(private route: ActivatedRoute
     , private favoriteService: FavoriteService,
+    private openLibraryApiService: OpenLibraryApiService,
       ) { }
 
   ngOnInit(): void {
@@ -25,15 +28,31 @@ export class BookDetailsComponent implements OnInit {
     this.bookKeyFromRoute = String(routeParams.get('bookKey'));
 
     // Find the book that correspond with the id provided in route.
-    this.book = books.find(
-      (book) => book.key === this.bookKeyFromRoute
-    );
+    this.getBook(this.bookKeyFromRoute);
+
   }
 
-
-  addToFavorite(book: Book) {
+  addToFavorite(book: any) {
     this.favoriteService.addToFavorite(book);
     window.alert('Your book has been added to the Favorite!');
   }
 
+  async getBook(key: String) {
+      const book =
+        await this.openLibraryApiService.getWork(key.toString());
+
+    this.book = book;
+    if (book.authors) {
+      this.getAuthor(book.authors[0].author.key);
+    }
+    }
+
+  async getAuthor(key: string) {
+    const author =
+      await this.openLibraryApiService.getAuthor(key);
+
+    console.log(author);
+
+    this.author = author;
+  }
 }

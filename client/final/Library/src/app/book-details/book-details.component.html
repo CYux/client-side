@@ -1,39 +1,31 @@
 <h2>Book Details</h2>
 
-<div *ngIf="book">
-<div class="Animation">
-  <div class="coverFloat" style="display:block;">
-  <a href="{{cover_url}}{{book.cover_i}}-L.jpg"aria-controls="seeImage" class="cover dialog" title="bigger resolution">
-    <img itemprop="image" [src]="cover_url+book.cover_i+'-M.jpg'" [srcset]="cover_url+book.cover_i+'-L.jpg'" [alt]="book.cover_i">
-  </a>
-  </div>
-</div>
 
-<div class="hidden">
-  <div class="coverF" id="seeImage">
-    <div class="head" id="seeImage">
-      <a class="closed" href="javascript:;">
-        "x"
-        <span class="shift">Close</span>
+<div *ngIf="book">
+  <div class="Animation">
+    <div class="coverFloat" style="display:block;" *ngIf="book.covers">
+      <a href="{{cover_url}}{{book.covers[0]}}-L.jpg" aria-controls="seeImage" class="cover dialog"
+        title="bigger resolution">
+        <img itemprop="image" [src]="cover_url+book.covers[0]+'-M.jpg'" [srcset]="cover_url+book.covers[0]+'-L.jpg'"
+          [alt]="book.covers[0]">
       </a>
     </div>
+  </div>
 
-    <a class="closed" href="javascript:;">
-      <img [src]="cover_url+book.cover_i+'-L.jpg'"[alt]="book.cover_i">
+
+
+  <h2>{{ book.title }}</h2>
+  <h4>Description</h4>
+  <article>{{book.description}}</article>
+  <h4>Subject:</h4>
+  <article>{{book.subjects}}</article>
+  <div *ngIf="author">
+    <a [title]="book.author_name+ ' details'" [routerLink]="[book.authors[0].author.key]">
+      <h4>Author: </h4>
+      <article>{{author.name}}</article>
     </a>
   </div>
-</div>
-
-
-  <h3>{{ book.title }}</h3>
-  <h4>publisher: {{book.publisher}}</h4>
-  <h5>first publish year: {{book.first_publish_year}}</h5>
-  <h6>Subject: {{book.subject}}</h6>
-  <a [title]="book.author_name+ ' details'"
-  [routerLink]="['/author/'+book.author_key]">
-  <h4>Author {{book.author_name}}</h4>
-</a>
+  <h4>Subject people:</h4>
+  <article>{{book.subject_people}}</article>
   <button type="button" (click)="addToFavorite(book)">Like</button>
 </div>
-
-
