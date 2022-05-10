@@ -2,6 +2,8 @@ import { Book } from './../models/book';
 import { OpenLibraryApiService } from './../service/open-library-api.service';
 import { Component, OnInit } from '@angular/core';
 import { books} from '../models/book';
+import { Author,authors } from '../models/author';
+
 @Component({
   selector: 'app-book-list',
   templateUrl: './book-list.component.html',
@@ -19,6 +21,7 @@ export class BookListComponent implements OnInit {
   }
   book : Book | undefined;
 
+
   async searchBooks() {
     const res =
       await this.openLibraryApiService.searchBooks('harry potter');
@@ -31,10 +34,4 @@ export class BookListComponent implements OnInit {
 
   }
 
-
-
-  onclick() {
-    window.alert('The product has been shared!');
-    console.log('The product has been shared!');
-  }
 }
